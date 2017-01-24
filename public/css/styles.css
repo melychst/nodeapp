@@ -1,0 +1,28 @@
+header {
+  background-color: #ffffff;
+  margin-top: 20px;
+  margin-bottom: 20px; }
+  header nav {
+    text-align: right; }
+    header nav ul {
+      margin: 0px;
+      padding: 0px;
+      position: relative;
+      top: 42px; }
+      header nav ul li {
+        display: inline-block;
+        padding: 0px 15px; }
+        header nav ul li a {
+          font-size: 36px;
+          color: #000000; }
+        header nav ul li a:hover {
+          color: #666666; }
+        header nav ul li a.active {
+          color: #cccccc; }
+
+main {
+  background-color: #ccc;
+  padding: 50px 0px;
+  margin-bottom: 20px; }
+
+/*# sourceMappingURL=styles.css.map */
