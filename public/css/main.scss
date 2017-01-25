@@ -54,11 +54,10 @@ form {
 .clear {
 	clear: both;
 }
-.first-graph {
-	width: 600px;
+svg {
 	background-color: #ffffff;
 	display: block;
-	div.bar {
+	rect {
 	    display: inline-block;
 	    background-color: teal;
 	    margin-right: 2px;

@@ -1,4 +1,47 @@
-<%- partial("header") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title><%= title %></title>
+	<link rel="stylesheet" type="text/css" href="vendor/bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<script type="text/javascript" src="vendor/bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="vendor/bower_components/d3/d3.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	<script type="text/javascript" src="js/graph-script.js"></script>
+	<script type="text/javascript">
+
+	</script>
+
+</head>
+<body>
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="logo">
+						<img src="image/logo.jpg">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<nav>
+						<ul class="navigation">
+							<li><a class="active" href="/">Home</a></li>
+							<li><a href="/graph">Graph</a></li>
+							<li><a href="/about">About</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="header-footer">
+						<h1><%= title %></h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
 	<main>
 		<div class="container">
 			<div class="row">
@@ -37,4 +80,14 @@
 
 
 
-<%- partial("footer") %>
+	<footer>
+ 		<div class="container">
+ 			<div class="row">
+ 				<div class="col-md-12">
+ 					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore architecto repellat quia minima tempore cupiditate, ipsum quas unde nam fuga voluptate eaque rem, praesentium recusandae. Rerum ipsam sequi laudantium dolore.
+ 				</div>
+ 			</div>
+ 		</div>		
+	</footer>
+</body>
+</html>
