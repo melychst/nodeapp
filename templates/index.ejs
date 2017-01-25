@@ -4,17 +4,37 @@
 			<div class="row">
 				<div class="col-md-8">
 					<div class="content">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda tempora cum illo sapiente magnam earum libero nobis accusamus architecto, soluta aspernatur id, odio quidem quasi ducimus maiores, possimus mollitia. Porro illo qui consequatur reprehenderit vel, odio natus eum officia, itaque adipisci dolores minima saepe deleniti esse, eos ut? Inventore, reprehenderit.					
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda tempora cum illo sapiente magnam earum libero nobis accusamus architecto, soluta aspernatur id, odio quidem	
 					</div>
+					<form action="/graph" method="POST">
+						
+						<div class="text-field">
+							<label for="dataJson">Ведіть дані для графіка
+							<textarea name="dataJson" id="data-value" cols="30" rows="10"></textarea></label>							
+						</div>
+
+						
+						<div class="radio-block">
+							<div class="type-graph">
+								<input name="graphType" type="radio" value="1" checked>
+								<label for="">Прший тип</label>								
+							</div>
+
+							<div class="type-graph">
+								<input name="graphType" type="radio" value="2"><label for="">Другий тип</label>
+							</div>
+							<div class="type-graph">
+								<input name="graphType" type="radio" value="3"><label for="">Третій тип</label>
+							</div>
+						</div>
+						<div class="clear"></div>
+
+						<input class="btn" type="submit" value="Відправити">
+					</form>
 				</div>
 				<div class="col-md-4">
 					<div class="sidebar">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+[ { "age": "<5", "population": 2704659 }, { "age": "5-13", "population": 4499890 }, { "age": "14-17", "population": 2159981 }, { "age": "18-24", "population": 3853788 }, { "age": "25-44", "population": 14106543 }, { "age": "45-64", "population": 8819342 }, { "age": "≥65", "population": 612463 } ]
 					</div>
 				</div>
 			</div>

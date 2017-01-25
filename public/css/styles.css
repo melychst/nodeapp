@@ -25,4 +25,32 @@ main {
   padding: 50px 0px;
   margin-bottom: 20px; }
 
+form {
+  margin: 20px 0px; }
+  form .text-field {
+    float: left; }
+    form .text-field label {
+      display: block;
+      color: blue; }
+    form .text-field textarea {
+      display: block; }
+  form .radio-block {
+    padding-left: 280px; }
+    form .radio-block .type-graph {
+      display: block; }
+
+.clear {
+  clear: both; }
+
+.first-graph {
+  width: 600px;
+  background-color: #ffffff;
+  display: block; }
+  .first-graph div.bar {
+    display: inline-block;
+    background-color: teal;
+    margin-right: 2px; }
+  .first-graph div.bar:last-child {
+    margin-right: 0px; }
+
 /*# sourceMappingURL=styles.css.map */
