@@ -1,20 +1,41 @@
 <html>
 <head>
 <style type="text/css">
-	h1 {
-			color:red; 
-			margin-left:100px; 
-			margin-top:50px;
-		}
+	.logo {
+		margin-bottom: 20px;
+	}
+	.content {
+		margin-bottom: 20px;
+	}
+	.sidebar {
+		padding-left: 510px;
+	}
+	.main {
+		width: 500px;
+		float: left;
+	}
+	.clear {
+		clear: both;
+	}
 </style>
 </head>
-
 <body>
-	<img src="/public/image/logo.jpg">
-	<h1>Hello world!</h1>
-	<div id="dataviz-container"></div>
+	<div class="logo"></div>
+	<div class="content">
+		<div class="main">
+			<graph></graph>
+		</div>
+		<div class="sidebar">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum asperiores deleniti dolores adipisci voluptates quidem porro ab, recusandae impedit distinctio vero soluta sapiente magni at praesentium! Commodi necessitatibus et possimus.
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="footer">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum asperiores deleniti dolores adipisci voluptates quidem porro ab, recusandae impedit distinctio vero soluta sapiente magni at praesentium! Commodi necessitatibus et possimus.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum asperiores deleniti dolores adipisci voluptates quidem porro ab, recusandae impedit distinctio vero soluta sapiente magni at praesentium! Commodi necessitatibus et possimus.
+	</div>
 
-	<graph></graph>
+	
 <script src="https://d3js.org/d3.v4.js"></script>
 
 </body>

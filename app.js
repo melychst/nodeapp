@@ -5,8 +5,9 @@ var bodyParser = require("body-parser");
 var ejs = require("ejs");
 var fs = require('fs');
 var pdf = require('html-pdf');
-var jsdom = require('jsdom');
-var d3 = require('d3');
+//var jsdom = require('jsdom');
+//var d3 = require('d3');
+var FirstGraph = require("./mod/FirstGraph.js");
 
 app = express();
 //var request = require("./request");
@@ -33,12 +34,10 @@ app.post("/graph", function (req, res, next) {
 	var graphType = req.body.graphType;
 	var dataJson = req.body.dataJson;
 
+	/*	
+	var htmlStub = fs.readFileSync(__dirname + "/templates/pdf-template.html").toString();
 	var imgSrc = 'file://' + __dirname + '/public/image/logo.png';
 	imgSrc = path.normalize(imgSrc);
-	
-	var htmlStub = fs.readFileSync(__dirname + "/templates/pdf-template.html").toString();
-
-	//console.log(htmlStub);
 
 	jsdom.env({
 		features : { QuerySelector : true }
@@ -48,34 +47,35 @@ app.post("/graph", function (req, res, next) {
 			// this callback function pre-renders the dataviz inside the html document, then export result into a static file
 			var $ = window.$;
 
-			$("h1").text("My name is Stepan");
+			$(".logo").append("<img src='" + imgSrc + "'>");
 
 			var graph = window.document.querySelector('graph')
-				, body = window.document.querySelector('body')
-				, circleId = 'a2324'  // say, this value was dynamically retrieved from some database
+			
+			var htmlPdf = FirstGraph(dataJson);
 
+	var data = JSON.parse(dataJson);
 		var scale = 10;
-	 	var max = d3.max(JSON.parse(dataJson));
-	 	var w = 600;
+	 	var max = d3.max(data);
+	 	var w = 500;
 	 	var h = max * scale + 50;
 	 	var barPadding = 1;
 
 		var svg = d3.select(graph).append("svg:svg").attr("width", w).attr("height", h);
 		svg.selectAll("rect")
-			.data(dataJson)
+			.data(data)
 			.enter()
 			.append("rect")
 			.attr("width", function(d) {
-				    var count = dataJson.length;
-				    var width = 600 - ((count - 1) * 2);
+				    var count = data.length;
+				    var width = w - ((count - 1) * 2);
 				    return width / count  + "px";
 				})
 			.attr("height", function(d) {
 				    return d*scale + "px";
 				})
 			.attr("x", function (d, i) {
-					var count = dataJson.length;
-				    var width = (600 - ((count - 1) * 2)) / count;
+					var count = data.length;
+				    var width = (w - ((count - 1) * 2)) / count;
 					return (i* (width + 2)) ;
 			})
 			.attr("y", function (d) {
@@ -86,7 +86,7 @@ app.post("/graph", function (req, res, next) {
 			});
 
 			svg.selectAll("text")
-		   .data(dataJson)
+		   .data(data)
 		   .enter()
 		   .append("text")
 		   .text(function(d) {
@@ -94,7 +94,7 @@ app.post("/graph", function (req, res, next) {
 		   })
 		   .attr("text-anchor", "middle")
 		   .attr("x", function(d, i) {
-		   		return i * (w / dataJson.length) + (w / dataJson.length - barPadding) / 2;
+		   		return i * (w / data.length) + (w / data.length - barPadding) / 2;
 		   })
 		   .attr("y", function(d) {
 		   		return h - (d * scale) + 24;
@@ -104,63 +104,35 @@ app.post("/graph", function (req, res, next) {
 		   .attr("fill", "white");
 
 
-			// generate the dataviz
-			/*	d3.select(el)
-				.append('svg:svg')
-					.attr('width', 600)
-					.attr('height', 300)
-					.append('circle')
-						.attr('cx', 300)
-						.attr('cy', 150)
-						.attr('r', 30)
-						.attr('fill', '#26963c')
-						.attr('id', circleId) // say, this value was dynamically retrieved from some database*/
-
-			// make the client-side script manipulate the circle at client side)
-			var clientScript = "d3.select('#" + circleId + "').transition().delay(1000).attr('fill', '#f9af26')"
-
-			d3.select(body)
-				.append('script')
-					.html(clientScript)
-
 			// save result in an html file, we could also keep it in memory, or export the interesting fragment into a database for later use
-			var svgsrc = window.document.documentElement.innerHTML;
+			var htmlPdf = window.document.documentElement.innerHTML; 
 
-			fs.writeFile('index.html', svgsrc, function(err) {
-				if(err) {
-					console.log('error saving document', err);
-				} else {
 
-					var imgSrc = 'file://' + __dirname + '/public/image/logo.png';
-					imgSrc = path.normalize(imgSrc);
 
-					var options = {
-						"format": 'Letter',
-						"orientation": "portrait",
-						"header": {
-							"contents": "",
-							"height": "50mm"
-						},
-						"footer": {
-							"height": "50mm",
-							"contents": "Some text for footer"
-						}
-					}
+		} // end jsDom done callback */
+		var link = __dirname;
 
-					htmlPdf = svgsrc;
-					//var htmlPdf = "<div id='pageHeader'><img src='"+ imgSrc +"'/><div style='text-align: center;'>Author: Marc Bachmann</div></div>";
-					pdf.create(htmlPdf, options)
-						.toFile('./tpm/graph.pdf', function(err, res) {
-			  				if (err) return console.log(err);
-			 		
-			 				console.log(res); // { filename: '/app/businesscard.pdf' } 
-						});
-					console.log('The file was saved!');
+		FirstGraph(dataJson, link, function (arg) {
+			var options = {
+				"format": 'Letter',
+				"orientation": "portrait",
+				"header": {
+					"contents": "",
+					"height": "1mm"
+				},
+				"footer": {
+					"height": "50mm",
+					"contents": "Some text for footer and copyright"
 				}
-			})	
-		} // end jsDom done callback
-	})
+			}
 
+			pdf.create(arg, options)
+				.toFile('./tpm/graph.pdf', function(err, res) {
+	  				if (err) return console.log(err);
+	 		
+	 				console.log(res); // { filename: '/app/businesscard.pdf' } 
+				});		
+		});
 	res.render("graph", {
 				title: "Graph", 
 				graphType: graphType, 
