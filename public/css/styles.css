@@ -31,13 +31,23 @@ form {
     float: left; }
     form .text-field label {
       display: block;
-      color: blue; }
+      color: blue;
+      font-size: 18px; }
     form .text-field textarea {
-      display: block; }
+      display: block;
+      margin-top: 10px; }
   form .radio-block {
-    padding-left: 280px; }
+    padding-left: 350px; }
     form .radio-block .type-graph {
-      display: block; }
+      display: block;
+      margin-bottom: 20px; }
+      form .radio-block .type-graph label {
+        font-size: 16px;
+        margin-left: 5px; }
+    form .radio-block p {
+      color: blue;
+      font-size: 18px;
+      font-weight: 600; }
 
 .clear {
   clear: both; }

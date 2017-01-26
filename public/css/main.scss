@@ -39,16 +39,30 @@ form {
 		label {
 			display: block;
 			color:blue;
+			font-size: 18px;
 		}
 		textarea {
 			display: block;
+			margin-top: 10px;
 		}
 	}
 	.radio-block {
-		padding-left: 280px;
+		padding-left: 350px;
 		.type-graph {
 			display: block;
+			margin-bottom: 20px;
+			label {
+				font-size: 16px;
+				margin-left: 5px;
+			}
 		}
+		p {
+			color:blue;
+			font-size: 18px;
+			font-weight: 600;
+		}
+
+
 	}	
 }
 .clear {

@@ -49,24 +49,6 @@
 			   .attr("font-family", "sans-serif")
 			   .attr("font-size", "18px")
 			   .attr("fill", "white");
-
-		/*
-		d3.select("graph")
-			.attr("class", "first-graph")
-			.selectAll("div")
-		    .data(data)
-		    .enter()
-		    .append("div")
-		    .attr("class", "bar")
-		    .style("height", function(d) {
-			    return d*10 + "px";
-			})
-			.style("width", function(d) {
-			    var count = data.length;
-			    var width = 600 - ((count - 1) * 2);
-			    return width / count  + "px";
-			});
-		*/
 	}
 
 	function secondGraph (data) {
