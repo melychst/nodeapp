@@ -88,8 +88,8 @@ htmlStub = '<html><head><style type="text/css">h1 {color:red; margin-left:100px;
 					if(err) {
 						console.log('error saving document', err);
 					} else {
-var imgSrc = path.join('file://' + __dirname, '/public/image/logo.jpg');
-//var imgSrc = 'file://' + __dirname + '/public/image/logo.jpg';
+
+var imgSrc = 'file://' + __dirname + '/public/image/logo.png';
 console.log(imgSrc);
 
 imgSrc = path.normalize(imgSrc);
@@ -100,15 +100,16 @@ var options = {
     "format": 'Letter',
     "orientation": "portrait",
     "header": {
-    		"contents": "Hello world 7",
-        "height": "90mm"
+    		"contents": "",
+        	"height": "50mm"
 		  },
 		  "footer": {
 		    "contents": "Some text for footer"
 		  }
 		}
  
-pdf.create("<div id='pageHeader'><img src='" + imgSrc + "' /><div style='text-align: center;'>Author: Marc Bachmann</div></div>", options).toFile('./graph_new.pdf', function(err, res) {
+pdf.create("<div id='pageHeader'><img src='file:///D:/Stepan/nodeapp/public/image/logo.png'/><div style='text-align: center;'>Author: Marc Bachmann</div></div>", options)
+	.toFile('./tpm/graph.pdf', function(err, res) {
   if (err) return console.log(err);
   console.log(res); // { filename: '/app/businesscard.pdf' } 
 });
