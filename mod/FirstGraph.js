@@ -5,7 +5,9 @@ var path = require("path");
 
 function FirstGraph (dataJson, link, callback) {
 
-	var htmlStub = fs.readFileSync(link + "/templates/pdf-template.html").toString();
+	var htmlStub = fs.readFileSync(link + "/templates/pdf-template.html",'utf8');
+
+	//console.log(htmlStub);
 	var imgSrc = 'file://' + link + '/public/image/logo.png';
 	imgSrc = path.normalize(imgSrc);
 
