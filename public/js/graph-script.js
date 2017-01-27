@@ -52,7 +52,7 @@
 	}
 
 	function secondGraph (data) {
-		
+		alert("Graph");
 	}
 
 	function thirdGraph (data) {
