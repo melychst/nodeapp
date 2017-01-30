@@ -51,11 +51,15 @@ var getPDF =  function savePDF (arg) {
 					}
 				}
 
+				var time = new Date();
+				console.log("Run create - " + time.getMinutes() + " : " + time.getSeconds() + " : " + time.getMilliseconds());
+
 				pdf.create(arg, options)
 					.toFile('./tpm/graph.pdf', function(err, res) {
 							if (err) return console.log(err);
-					
 							console.log(res); // { filename: '/app/businesscard.pdf' } 
+							var time = new Date();
+							console.log("Finish create - " + time.getMinutes() + " : " + time.getSeconds() + " : " + time.getMilliseconds());
 					});
 				}
 
