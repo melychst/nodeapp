@@ -3,7 +3,7 @@ var jsdom = require('jsdom');
 var fs = require("fs");
 var path = require("path");
 
-function FirstGraph (dataJson, link, callback) {
+function FirstGraph (data, link, callback) {
 
 	var htmlStub = fs.readFileSync(link + "/templates/pdf-template.html",'utf8');
 
@@ -20,14 +20,11 @@ jsdom.env({
 			var $ = window.$;
 
 			$(".logo").append("<img src='" + imgSrc + "'>");
-			console.log(dataJson);
-			$("data").append("<div>" + dataJson + "</div");
+			console.log(data);
+			$("data").append("<div>" + data + "</div");
 
 			var graph = window.document.querySelector('graph')
 
-			
-			
-		var data = JSON.parse(dataJson);
 		var scale = 10;
 	 	var max = d3.max(data);
 	 	var w = 500;

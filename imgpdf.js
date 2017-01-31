@@ -26,8 +26,13 @@ var options = {
 var result = "<div id='pageHeader'><img src='" + imgSrc + "' /><div>Author: Marc Bachmann</div></div>";
 result += "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>";
 var fileName = __dirname + '/tmp/graph.pdf';
+        var time = new Date();
+        console.log("Run create - " + time.getMinutes() + " : " + time.getSeconds() + " : " + time.getMilliseconds());
 pdf.create(result, options).toFile(fileName, function(err, res) {
   if (err) {
     console.error(err);
   }
+  var time = new Date();
+              console.log("Finish create - " + time.getMinutes() + " : " + time.getSeconds() + " : " + time.getMilliseconds());
+
 });

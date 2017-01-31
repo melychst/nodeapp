@@ -3,7 +3,7 @@ var jsdom = require('jsdom');
 var fs = require("fs");
 var path = require("path");
 
-function SecondGraph (dataJson, link, callback) {
+function SecondGraph (data, link, callback) {
 
 	var htmlStub = fs.readFileSync(link + "/templates/pdf-template.html",'utf8');
 
@@ -20,18 +20,14 @@ jsdom.env({
 			var $ = window.$;
 
 			$(".logo").append("<img src='" + imgSrc + "'>");
-			console.log(dataJson);
-			$("data").append("<div>" + dataJson + "</div");
+			console.log(data);
+			$("data").append("<div>" + data + "</div");
 			var graph = window.document.querySelector('graph');
-			
-			
-		var data = JSON.parse(dataJson);
+
 
 	 	var w = 640;
 	 	var h = 320;
    		radius = Math.min(w, h) / 2;
-;
-
 
 		//var svg = d3.select(graph).append("svg:svg").attr("width", w).attr("height", h);
 		
