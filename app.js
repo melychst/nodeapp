@@ -43,11 +43,15 @@ app.post("/graph", function (req, res, next) {
 	
 	var statusResponse = validation(req.body);
 
-	console.log("After valodate -> " + statusResponse);
+	//console.log("After valodate -> " + statusResponse);
 
 	if ( (statusResponse.status == 8) || (statusResponse.status == 0) ) {
-		res.send(statusResponse);
-		res.end();
+		res
+			.status(400)
+			.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true })
+			.type("json")
+			.send(JSON.stringify(statusResponse))
+			.end();
 	
 	} else {
 
@@ -71,17 +75,27 @@ app.post("/graph", function (req, res, next) {
 				}
 
 				var time = new Date();
-				console.log("Run create - " + time.getMinutes() + " : " + time.getSeconds() + " : " + time.getMilliseconds());
 
+				var nameFile = time.getMinutes() + time.getSeconds()+time.getMilliseconds();
+				console.log("Run create file graph_" + nameFile +" -> " + time.getMinutes() + " : " + time.getSeconds() + " : " + time.getMilliseconds());
+				
 				pdf.create(arg, options)
-					.toFile('./tmp/graph.pdf', function(err, resp) {
+					.toFile('./tmp/graph_'+nameFile+'.pdf', function(err, resp) {
 							if (err) return console.log(err);
 							console.log(resp); // { filename: '/app/businesscard.pdf' } 
 							
 							var time = new Date();
-							console.log("Finish create - " + time.getMinutes() + " : " + time.getSeconds() + " : " + time.getMilliseconds());
+							console.log("Finish create file graph_" + nameFile +" -> " + time.getMinutes() + " : " + time.getSeconds() + " : " + time.getMilliseconds());
 					});
-					res.send("Ok. graph number "+ graphType +" is ready");
+
+					statusResponse.status = 200;
+					statusResponse.message = "Ok. graph type "+ graphType +" is ready";
+
+					res
+					.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true })
+					.type("json")
+					.send(JSON.stringify(statusResponse))
+					.end();
 				}
 		
 		switch (graphType) {

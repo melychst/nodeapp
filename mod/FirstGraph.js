@@ -20,7 +20,7 @@ jsdom.env({
 			var $ = window.$;
 
 			$(".logo").append("<img src='" + imgSrc + "'>");
-			console.log(data);
+			//console.log(data);
 			$("data").append("<div>" + data + "</div");
 
 			var graph = window.document.querySelector('graph')

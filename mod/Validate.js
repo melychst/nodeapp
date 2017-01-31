@@ -1,5 +1,5 @@
 function Validate (dataJson) {
-	console.log("Valid -> " + dataJson);
+	//console.log("Valid -> " + dataJson);
 	var graphType = dataJson.graph;
 	var dataJson = dataJson.data;
 
@@ -27,16 +27,16 @@ function Validate (dataJson) {
 	} else {
 		console.log("ERROR");
 	}
-	console.log("Status -> " + statusResponse);
+	//console.log("Status -> " + statusResponse);
 	return statusResponse;
 }
 
 function validFirstGaph(dataJson, statusResponse) {
 	dataJson.forEach(function (value) {
 		if (!isNaN(parseFloat(value)) && isFinite(value))  {
-			console.log("Numeric -> " + value);
+			//console.log("Numeric -> " + value);
 		} else {
-			console.log("NO NOMERIC");
+			//console.log("NO NOMERIC");
 			statusResponse.status = 0;
 			statusResponse.message = "Sorry, data must be a numeric";
 			return;
@@ -52,7 +52,6 @@ function validSecondGaph(dataJson, statusResponse) {
 			console.log("NO NOMERIC");
 			statusResponse.status = 0;
 			statusResponse.message = "Sorry, 'population' field must be a numeric";
-			break;
 		}
 	})
 }
