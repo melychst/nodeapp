@@ -12,18 +12,17 @@ function SecondGraph (data, link, callback) {
 	imgSrc = path.normalize(imgSrc);
 
 jsdom.env({
-		features : { QuerySelector : true }
-		, html : htmlStub
-		, scripts: ["http://code.jquery.com/jquery.js"]
-		, done : function(errors, window) {
-			// this callback function pre-renders the dataviz inside the html document, then export result into a static file
-			var $ = window.$;
+	features : { QuerySelector : true }
+	, html : htmlStub
+	, scripts: ["http://code.jquery.com/jquery.js"]
+	, done : function(errors, window) {
+		// this callback function pre-renders the dataviz inside the html document, then export result into a static file
+		var $ = window.$;
 
-			$(".logo").append("<img src='" + imgSrc + "'>");
-			console.log(data);
-			$("data").append("<div>" + data + "</div");
-			var graph = window.document.querySelector('graph');
-
+		$(".logo").append("<img src='" + imgSrc + "'>");
+		console.log(data);
+		$("data").append("<div>" + data + "</div");
+		var graph = window.document.querySelector('graph');
 
 	 	var w = 640;
 	 	var h = 320;
@@ -41,8 +40,6 @@ jsdom.env({
 			var pie = d3.layout.pie()
 			    .sort(null)
 			    .value(function(d) { return d.population; });
-
-
 
 			var svg = d3.select(graph).append("svg")
 			    .attr("width", w)

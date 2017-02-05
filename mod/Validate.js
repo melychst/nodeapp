@@ -22,7 +22,6 @@ function Validate (dataJson) {
 					statusResponse["status"] = 8;
 					statusResponse["message"] = "Sorry but type graph is wrong!";
 					return statusResponse;
-					break;
 		}
 	} else {
 		console.log("ERROR");
@@ -47,9 +46,9 @@ function validFirstGaph(dataJson, statusResponse) {
 function validSecondGaph(dataJson, statusResponse) {
 	dataJson.forEach(function (value) {
 		if (!isNaN(parseFloat(value.population)) && isFinite(value.population))  {
-			console.log("Numeric -> " + value);
+			//console.log("Numeric -> " + value.population);
 		} else {
-			console.log("NO NOMERIC");
+			console.log("NO NOMERIC -> " + value.population);
 			statusResponse.status = 0;
 			statusResponse.message = "Sorry, 'population' field must be a numeric";
 		}
