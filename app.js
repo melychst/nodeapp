@@ -7,8 +7,9 @@ var ejs = require("ejs");
 app = express();
 app.listen(8080);
 
-var FirstGraph = require("./mod/FirstGraph.js");
-var SecondGraph = require("./mod/SecondGraph.js");
+var constant = require("./mod/constants.js");
+var FirstGraph = require("./mod/columnChart.js");
+var SecondGraph = require("./mod/donutChart.js");
 var validation = require("./mod/validate");
 var savePDF = require("./mod/savePDF");
 
@@ -20,56 +21,50 @@ app.engine("ejs", require("ejs-locals"));
 app.set("views", __dirname + "/templates");
 app.set("view engine", "ejs");
 
-function sendRes(graphType, res) {
+function sendRes(res) {
 	var statusResponse = {};
-		statusResponse.status = 200;
-		statusResponse.message = "Ok. graph is ready";			
 
-		res
-		.cookie('remember me', '1', { expires: new Date(Date.now() + 900000), httpOnly: true })
+	statusResponse.status = constant.STATUS_GRAPH_IS_READY;
+	statusResponse.message = "Ok. graph is ready";			
+
+	res
+		.status(200)
 		.type("json")
-		.append("Status", "Ok, graph " + graphType + " was built!")
 		.send(JSON.stringify(statusResponse))
 		.end();  
 }
 
-
-
 app.post("/graph", function (req, res, next) {
-	//console.log(req.body);
-	var statusResponse = validation(req.body);
 
-	if ( (statusResponse.status == 8) || (statusResponse.status == 0) ) {
+	var statusResponse = validation(req.body);
+	//console.log(statusResponse);
+	if ( ( statusResponse.status != constant.STATUS_DATA_OK ) ) {
 		res
-			.status(400)
-			.cookie('rememberme', '1', { expires: new Date(Date.now() + 900000), httpOnly: true })
+			.status(402)
 			.type("json")
-			.append("ERROR", "The data not validate" )
 			.send(JSON.stringify(statusResponse))
 			.end();
 	
 	} else {
 
-	var graphType = req.body.graph;
-	var dataJson = req.body.data;
-	var link = __dirname;
-
+		var graphType = req.body.graph;
+		var dataJson = req.body.data;
+		var link = __dirname;
 
 		switch (graphType) {
 			
 			case 1 : FirstGraph(dataJson, link, savePDF);
-				 	 sendRes(graphType, res);			
+				 	 sendRes(res);			
 					 break;
 
 			case 2 : SecondGraph(dataJson, link, savePDF);
-					 sendRes(graphType);	
+					 sendRes(res);	
 					 break;
 
 			default : res
-						.status(400)
+						.status(401)
 						.type("json")
-						.append("ERROR", "Type graph is wrong!")
-						.send(req.body);
+						.send(statusResponse);
 		}
 	}
 });

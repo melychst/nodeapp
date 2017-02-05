@@ -1,14 +1,13 @@
+var constant = require("./constants.js");
+
 function Validate (dataJson) {
-	//console.log("Valid -> " + dataJson);
+
 	var graphType = dataJson.graph;
 	var dataJson = dataJson.data;
 
 	var statusResponse = {};
 
-	//console.log(graphType);
-
-	if ( graphType && (graphType != "") ) {
-		//console.log("OK");
+	if ( (graphType != undefined) && (graphType != "") ) {
 
 		switch (graphType) {
 			case 1 : 
@@ -19,38 +18,33 @@ function Validate (dataJson) {
 					validSecondGaph(dataJson, statusResponse);
 					break;
 			default : 
-					statusResponse["status"] = 8;
-					statusResponse["message"] = "Sorry but type graph is wrong!";
+					statusResponse.status = constant.STATUS_WRONG_TYPE_GRAPH;
+					statusResponse.message = "Sorry, but type graph is wrong!";
 					return statusResponse;
 		}
 	} else {
-		console.log("ERROR");
+		statusResponse.status = constant.STATUS_NO_TYPE_GRAPH;
+		statusResponse.message = "Sorry, but you need add type of graph!";
+		return statusResponse;
 	}
-	//console.log("Status -> " + statusResponse);
+	statusResponse.status = constant.STATUS_DATA_OK;
 	return statusResponse;
 }
 
 function validFirstGaph(dataJson, statusResponse) {
 	dataJson.forEach(function (value) {
-		if (!isNaN(parseFloat(value)) && isFinite(value))  {
-			//console.log("Numeric -> " + value);
-		} else {
-			//console.log("NO NOMERIC");
-			statusResponse.status = 0;
-			statusResponse.message = "Sorry, data must be a numeric";
-			return;
+		if (isNaN(parseFloat(value)) && !isFinite(value))  {
+			statusResponse.status = constant.STATUS_DATA_NO_NUMERIC;
+			statusResponse.message = "Sorry, data '" + value + "' must be a numeric";
 		}
 	})
 }
 
 function validSecondGaph(dataJson, statusResponse) {
 	dataJson.forEach(function (value) {
-		if (!isNaN(parseFloat(value.population)) && isFinite(value.population))  {
-			//console.log("Numeric -> " + value.population);
-		} else {
-			console.log("NO NOMERIC -> " + value.population);
-			statusResponse.status = 0;
-			statusResponse.message = "Sorry, 'population' field must be a numeric";
+		if (isNaN(parseFloat(value.population)) && !isFinite(value.population))  {
+			statusResponse.status = constant.STATUS_DATA_NO_NUMERIC;
+			statusResponse.message = "Sorry, 'population' field '" + value.population + "' must be a numeric";
 		}
 	})
 }
