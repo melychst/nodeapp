@@ -27,7 +27,7 @@ app.post("/graph", function (req, res, next) {
 	//console.log(statusResponse);
 	if ( ( statusResponse.status != constant.STATUS_DATA_OK ) ) {
 		res
-			.status(402)
+			.status(400)
 			.type("json")
 			.send(JSON.stringify(statusResponse))
 			.end();
@@ -47,7 +47,7 @@ app.post("/graph", function (req, res, next) {
 					 break;
 
 			default : res
-						.status(401)
+						.status(400)
 						.type("json")
 						.send(statusResponse);
 		}
