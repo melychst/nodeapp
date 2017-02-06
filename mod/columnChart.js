@@ -3,7 +3,7 @@ var jsdom = require('jsdom');
 var fs = require("fs");
 var path = require("path");
 
-function columnChart(data, link, savePDF) {
+function columnChart(data, link, savePDF, res) {
 
 	var htmlStub = fs.readFileSync(link + "/templates/pdf-template.html",'utf8');
 
@@ -73,7 +73,7 @@ function columnChart(data, link, savePDF) {
 								
 			var htmlPdf = window.document.documentElement.innerHTML; 
 
-			savePDF(htmlPdf);
+			savePDF(htmlPdf, res);
 		}
 	})
 }

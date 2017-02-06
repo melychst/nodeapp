@@ -3,7 +3,7 @@ var jsdom = require('jsdom');
 var fs = require("fs");
 var path = require("path");
 
-function donutChart(data, link, savePDF) {
+function donutChart(data, link, savePDF, res) {
 
 	var htmlStub = fs.readFileSync(link + "/templates/pdf-template.html",'utf8');
 
@@ -65,7 +65,7 @@ function donutChart(data, link, savePDF) {
 			
 			var htmlPdf = window.document.documentElement.innerHTML; 
 				
-			savePDF(htmlPdf);
+			savePDF(htmlPdf, res);
 		}
 	}) 
 }

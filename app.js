@@ -8,8 +8,8 @@ app = express();
 app.listen(8080);
 
 var constant = require("./mod/constants.js");
-var FirstGraph = require("./mod/columnChart.js");
-var SecondGraph = require("./mod/donutChart.js");
+var columnChart = require("./mod/columnChart.js");
+var donutChart = require("./mod/donutChart.js");
 var validation = require("./mod/validate");
 var savePDF = require("./mod/savePDF");
 
@@ -20,19 +20,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.engine("ejs", require("ejs-locals"));
 app.set("views", __dirname + "/templates");
 app.set("view engine", "ejs");
-
-function sendRes(res) {
-	var statusResponse = {};
-
-	statusResponse.status = constant.STATUS_GRAPH_IS_READY;
-	statusResponse.message = "Ok. graph is ready";			
-
-	res
-		.status(200)
-		.type("json")
-		.send(JSON.stringify(statusResponse))
-		.end();  
-}
 
 app.post("/graph", function (req, res, next) {
 
@@ -53,12 +40,10 @@ app.post("/graph", function (req, res, next) {
 
 		switch (graphType) {
 			
-			case 1 : FirstGraph(dataJson, link, savePDF);
-				 	 sendRes(res);			
+			case 1 : columnChart(dataJson, link, savePDF, res);
 					 break;
 
-			case 2 : SecondGraph(dataJson, link, savePDF);
-					 sendRes(res);	
+			case 2 : donutChart(dataJson, link, savePDF, res);
 					 break;
 
 			default : res
