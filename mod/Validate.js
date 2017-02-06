@@ -11,17 +11,18 @@ function Validate (dataJson) {
 
 		switch (graphType) {
 			case 1 : 
-					validFirstGaph(dataJson, statusResponse);
+					validColumnChart(dataJson, statusResponse);
 					break;
 
 			case 2 : 
-					validSecondGaph(dataJson, statusResponse);
+					validDonutChart(dataJson, statusResponse);
 					break;
 			default : 
 					statusResponse.status = constant.STATUS_WRONG_TYPE_GRAPH;
 					statusResponse.message = "Sorry, but type graph is wrong!";
 					return statusResponse;
 		}
+		return statusResponse;
 	} else {
 		statusResponse.status = constant.STATUS_NO_TYPE_GRAPH;
 		statusResponse.message = "Sorry, but you need add type of graph!";
@@ -31,16 +32,17 @@ function Validate (dataJson) {
 	return statusResponse;
 }
 
-function validFirstGaph(dataJson, statusResponse) {
+function validColumnChart(dataJson, statusResponse) {
 	dataJson.forEach(function (value) {
 		if (isNaN(parseFloat(value)) && !isFinite(value))  {
 			statusResponse.status = constant.STATUS_DATA_NO_NUMERIC;
 			statusResponse.message = "Sorry, data '" + value + "' must be a numeric";
+
 		}
 	})
 }
 
-function validSecondGaph(dataJson, statusResponse) {
+function validDonutChart(dataJson, statusResponse) {
 	dataJson.forEach(function (value) {
 		if (isNaN(parseFloat(value.population)) && !isFinite(value.population))  {
 			statusResponse.status = constant.STATUS_DATA_NO_NUMERIC;
